@@ -1,0 +1,88 @@
+    1  whoami
+    2  id
+    3  sudo groupadd students
+    4  sudo useradd -m -u 1234 -g students user1
+    5  sudo passwd user1
+    6  clr
+    7  sudo passwd user1
+    8  sudo chage -M 90 user1
+    9  id user1
+   10  sudo chage -l user1
+   11  sudo find / -type f -perm -4000 -ls 2>/dev/null | tee ~/suid-files.out
+   12  sudo ps -eo pid,ruid,euid,user,ruser,comm | awk 'NR==1 || ($2 != 0 && $3 == 0)' | tee ~/privileged-processes.out
+   13  cat /etc/shadow
+   14  command -v cat
+   15  sudo mkdir /home/user1/lab
+   16  sudo cp /usr/bin/cat /home/user1/lab/cat-suid
+   17  sudo chown root:root /home/user1/lab/cat-suid
+   18  sudo chmod 4755 /home/user1/lab/cat-suid
+   19  ls -l /home/user1/lab/cat-suid
+   20  sudo ls -l /home/user1/lab/cat-suid
+   21  cat /etc/shadow
+   22  sudo -u user1 /home/user1/lab/cat-suid /etc/shadow
+   23  su - user1
+   24  stat /home/user1/lab/cat-suid >> ~/stat.out
+   25  sudo stat /home/user1/lab/cat-suid >> ~/stat.out
+   26  command -v chown
+   27  sudo cp /usr/bin/chown /home/user1/lab/chown-cap
+   28  sudo chown root::root /home/user1/lab/chown-cap
+   29  sudo chown root:root /home/user1/lab/chown-cap
+   30  sudo setcap cap_chown+ep /home/user1/lab/chown-cap
+   31  getcap /home/user1/lab/chown-cap
+   32  sudo getcap /home/user1/lab/chown-cap
+   33  getcap /home/user1/lab/chown-cap > ~/getcap.out
+   34  sudo getcap /home/user1/lab/chown-cap > ~/getcap.out
+   35  sudo touch /home/user1/lab/rootfile
+   36  sudo chown root:root /home/user1/lab/rootfile
+   37  sudo -u user1 /home/user1/lab/chown-cap user1:user1 /home/user1/lab/rootfile
+   38  sudo -u user1 /home/user1/lab/chown-cap user1:students /home/user1/lab/rootfile
+   39  ls -l /home/user1/lab/rootfile
+   40  sudo ls -l /home/user1/lab/rootfile
+   41  stat /home/user1/lab/chown-cap >>~/stat.out
+   42  sudo stat /home/user1/lab/chown-cap >>~/stat.out
+   43  sudo visudo
+   44  sudo -l -U user1
+   45  date
+   46  date '+%H:%M:%S'
+   47  sudo -u user1 sudo /usr/bin/date -s '11:35:02'
+   48  date
+   49  timedatectl status
+   50  sudo timedatectl set-ntp true
+   51  timedatectl status
+   52  systemctl status chronyd --no-pager
+   53  sudo chronyc makestep
+   54  timedatectl status
+   55  ls -l ~/suid-files.out ~/privileged-processes.out ~/stat.out ~/getcap.out 2>/dev/null
+   56  mkdir ~/mephi-linux-security-2026
+   57  cp ~/suid-files.out ~/mephi-linux-seciritu-2026/
+   58  mkdir ~/mephi-linux-security-2026
+   59  cp ~/suid-files.out ~/mephi-linux-security-2026/
+   60  cp ~/privileged-processes.out ~/mephi-linux-security-2026/
+   61  cp ~/stat.out ~/mephi-linux-security-2026/
+   62  cp ~/getcap.out ~/mephi-linux-security-2026/
+   63  cp ~/mephi-screenshot.png ~/mephi-linux-security-2026/
+   64* 
+   65  cd ~/mephi-linux-security-2026
+   66  git init
+   67  git status
+   68  git add getcap.out mephi-screenshot.png privileged-processes.out stat.out suid-files.out
+   69  git commit -m "Add homework"
+   70  git branch -M main
+   71  git remote add origin https://github.com/DarinaNikolskaya/mephi-linux-security-2026.git
+   72  git remotte -v
+   73  git remote -v
+   74  git commit -m "Add homework"
+   75  git push -u origin main
+   76  git remote add origin https://github.com/DarinaNikolskaya/mephi-linux-security-2026.git
+   77  git push -u origin main
+   78  command -v gh
+   79  git config --show-origin --get-all credential.username
+   80  printf "protocol=https\nhost=github.com\nusername=darinik3007\n\n" | git credential reject
+   81  git push -u origin main
+   82  printf "protocol=https\nhost=github.com\nusername=darinik3007\n\n" | git credential reject
+   83  git push -u origin main
+   84  git config --show-origin --get-all credential.username
+   85  git remote set-url origin https://DarinaNikolskaya@github.com/DarinaNikolskaya/mephi-linux-security-2026.git
+   86  git remote -v
+   87  git push -u origin main
+   88  history > ~/history.out
