@@ -1,0 +1,5 @@
+    PID  RUID  EUID USER     RUSER    COMMAND
+   1280  1000     0 root     darinan+ fusermount3
+   3025  1000     0 root     darinan+ passwd
+   3027  1000     0 root     darinan+ sudo
+   3031  1000     0 root     darinan+ sudo
